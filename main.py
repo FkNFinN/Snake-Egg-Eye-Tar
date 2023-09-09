@@ -10,6 +10,11 @@ bSHD = pygame.transform.rotate(bSH, 180)
 bSHR = pygame.transform.rotate(bSH, 270)
 bSHL = pygame.transform.rotate(bSH, 90)
 
+bST = pygame.image.load("BsnakeTail.png")
+bSTD = pygame.transform.rotate(bST, 180)
+bSTR = pygame.transform.rotate(bST, 270)
+bSTL = pygame.transform.rotate(bST, 90)
+
 gem1 = pygame.image.load("gem1.png")
 gem2 = pygame.image.load("gem2.png")
 map11 = pygame.image.load("map11.png")
@@ -146,8 +151,15 @@ while on:
                 screen.blit(bSH,bSnake)
             pygame.draw.rect(screen, (50,70,150), pygame.Rect(oldposB[0][0]*30,oldposB[0][1]*30, 30, 30))
             pygame.draw.rect(screen, (50,90,150), pygame.Rect(oldposB[1][0]*30,oldposB[1][1]*30, 30, 30))
-            pygame.draw.rect(screen, (50,110,150), pygame.Rect(oldposB[2][0]*30,oldposB[2][1]*30, 30, 30))
-
+            if oldposB[1][0] < oldposB[2][0]:
+                screen.blit(bSTL,(oldposB[2][0]*30,oldposB[2][1]*30))#L
+            elif oldposB[1][0] > oldposB[2][0]:
+                screen.blit(bSTR,(oldposB[2][0]*30,oldposB[2][1]*30))#R
+            elif oldposB[1][1] < oldposB[2][1]:
+                screen.blit(bST,(oldposB[2][0]*30,oldposB[2][1]*30))
+            elif oldposB[1][1] > oldposB[2][1]:
+                screen.blit(bSTD,(oldposB[2][0]*30,oldposB[2][1]*30))#D
+            
             pygame.draw.rect(screen, (150,50,50), rSnake) #RGB
             pygame.draw.rect(screen, (150,70,50), pygame.Rect(oldposR[0][0]*30,oldposR[0][1]*30, 30, 30))
             pygame.draw.rect(screen, (150,90,50), pygame.Rect(oldposR[1][0]*30,oldposR[1][1]*30, 30, 30))

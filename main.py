@@ -10,10 +10,51 @@ bSHD = pygame.transform.rotate(bSH, 180)
 bSHR = pygame.transform.rotate(bSH, 270)
 bSHL = pygame.transform.rotate(bSH, 90)
 
+bSSU = pygame.image.load("bSST.png")
+bSSD = pygame.transform.rotate(bSSU, 180)
+bSSL = pygame.transform.rotate(bSSU, 90)
+bSSR = pygame.transform.rotate(bSSU, 270)
+
+bSbLU = pygame.image.load("bSLU.png")
+bSbRD = pygame.transform.rotate(bSbLU, 180)
+bSbLD = pygame.transform.rotate(bSbLU, 90)
+bSbRU = pygame.transform.rotate(bSbLU, 270)
+
+bSsLD = pygame.image.load("bSLD.png")
+bSsRD = pygame.transform.rotate(bSsLD, 90)
+bSsLU = pygame.transform.rotate(bSsLD, 270)
+bSsRU = pygame.transform.rotate(bSsLD, 180)
+
 bST = pygame.image.load("BsnakeTail.png")
 bSTD = pygame.transform.rotate(bST, 180)
 bSTR = pygame.transform.rotate(bST, 270)
 bSTL = pygame.transform.rotate(bST, 90)
+
+#Red
+rSH = pygame.image.load("RedSnakeHead.png")
+rSHD = pygame.transform.rotate(rSH, 180)
+rSHR = pygame.transform.rotate(rSH, 270)
+rSHL = pygame.transform.rotate(rSH, 90)
+
+rSSU = pygame.image.load("rSST.png")
+rSSD = pygame.transform.rotate(rSSU, 180)
+rSSL = pygame.transform.rotate(rSSU, 90)
+rSSR = pygame.transform.rotate(rSSU, 270)
+
+rSbLU = pygame.image.load("rSLU.png")
+rSbRD = pygame.transform.rotate(rSbLU, 180)
+rSbLD = pygame.transform.rotate(rSbLU, 90)
+rSbRU = pygame.transform.rotate(rSbLU, 270)
+
+rSsLD = pygame.image.load("rSLD.png")
+rSsRD = pygame.transform.rotate(rSsLD, 90)
+rSsLU = pygame.transform.rotate(rSsLD, 270)
+rSsRU = pygame.transform.rotate(rSsLD, 180)
+
+rST = pygame.image.load("RsnakeTail.png")
+rSTD = pygame.transform.rotate(rST, 180)
+rSTR = pygame.transform.rotate(rST, 270)
+rSTL = pygame.transform.rotate(rST, 90)
 
 gem1 = pygame.image.load("gem1.png")
 gem2 = pygame.image.load("gem2.png")
@@ -141,6 +182,7 @@ while on:
                 rSnake = pygame.Rect(posR[0]*30,posR[1]*30,30,30)
 
             #generate snake
+            #B head
             if dirB == 1:
                 screen.blit(bSHR,bSnake)
             elif dirB == 2:
@@ -149,27 +191,147 @@ while on:
                 screen.blit(bSHL,bSnake)
             elif dirB == 4:
                 screen.blit(bSH,bSnake)
-            pygame.draw.rect(screen, (50,70,150), pygame.Rect(oldposB[0][0]*30,oldposB[0][1]*30, 30, 30))
-            pygame.draw.rect(screen, (50,90,150), pygame.Rect(oldposB[1][0]*30,oldposB[1][1]*30, 30, 30))
+            
+            #B body 1
+            if posB[0] < oldposB[0][0] and oldposB[0][0] < oldposB[1][0]:#LR
+                screen.blit(bSSL,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[0] > oldposB[0][0] and oldposB[0][0] > oldposB[1][0]:#RL
+                screen.blit(bSSR,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[1] < oldposB[0][1] and oldposB[0][1] < oldposB[1][1]:#UD
+                screen.blit(bSSU,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[1] > oldposB[0][1] and oldposB[0][1] > oldposB[1][1]:#DU
+                screen.blit(bSSD,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[0] < oldposB[0][0] and oldposB[0][1] < oldposB[1][1]:#LD
+                screen.blit(bSsLD,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[0] < oldposB[0][0] and oldposB[0][1] > oldposB[1][1]:#LU
+                screen.blit(bSbLU,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[0] > oldposB[0][0] and oldposB[0][1] < oldposB[1][1]:#RD
+                screen.blit(bSbRD,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[0] > oldposB[0][0] and oldposB[0][1] > oldposB[1][1]:#RU
+                screen.blit(bSsRU,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[1] < oldposB[0][1] and oldposB[0][0] < oldposB[1][0]:#UR
+                screen.blit(bSbRU,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[1] < oldposB[0][1] and oldposB[0][0] > oldposB[1][0]:#UL
+                screen.blit(bSsLU,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[1] > oldposB[0][1] and oldposB[0][0] < oldposB[1][0]:#DR
+                screen.blit(bSsRD,(oldposB[0][0]*30,oldposB[0][1]*30))
+            elif posB[1] > oldposB[0][1] and oldposB[0][0] > oldposB[1][0]:#DL
+                screen.blit(bSbLD,(oldposB[0][0]*30,oldposB[0][1]*30))
+
+            #B body 2
+            if oldposB[0][0] < oldposB[1][0] and oldposB[1][0] < oldposB[2][0]:#LR
+                screen.blit(bSSL,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][0] > oldposB[1][0] and oldposB[1][0] > oldposB[2][0]:#RL
+                screen.blit(bSSR,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][1] < oldposB[1][1] and oldposB[1][1] < oldposB[2][1]:#UD
+                screen.blit(bSSU,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][1] > oldposB[1][1] and oldposB[1][1] > oldposB[2][1]:#DU
+                screen.blit(bSSD,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][0] < oldposB[1][0] and oldposB[1][1] < oldposB[2][1]:#LD
+                screen.blit(bSsLD,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][0] < oldposB[1][0] and oldposB[1][1] > oldposB[2][1]:#LU
+                screen.blit(bSbLU,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][0] > oldposB[1][0] and oldposB[1][1] < oldposB[2][1]:#RD
+                screen.blit(bSbRD,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][0] > oldposB[1][0] and oldposB[1][1] > oldposB[2][1]:#RU
+                screen.blit(bSsRU,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][1] < oldposB[1][1] and oldposB[1][0] < oldposB[2][0]:#UR
+                screen.blit(bSbRU,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][1] < oldposB[1][1] and oldposB[1][0] > oldposB[2][0]:#UL
+                screen.blit(bSsLU,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][1] > oldposB[1][1] and oldposB[1][0] < oldposB[2][0]:#DR
+                screen.blit(bSsRD,(oldposB[1][0]*30,oldposB[1][1]*30))
+            elif oldposB[0][1] > oldposB[1][1] and oldposB[1][0] > oldposB[2][0]:#DL
+                screen.blit(bSbLD,(oldposB[1][0]*30,oldposB[1][1]*30))
+
+            #B tail
             if oldposB[1][0] < oldposB[2][0]:
-                screen.blit(bSTL,(oldposB[2][0]*30,oldposB[2][1]*30))#L
+                screen.blit(bSTL,(oldposB[2][0]*30,oldposB[2][1]*30))
             elif oldposB[1][0] > oldposB[2][0]:
-                screen.blit(bSTR,(oldposB[2][0]*30,oldposB[2][1]*30))#R
+                screen.blit(bSTR,(oldposB[2][0]*30,oldposB[2][1]*30))
             elif oldposB[1][1] < oldposB[2][1]:
                 screen.blit(bST,(oldposB[2][0]*30,oldposB[2][1]*30))
             elif oldposB[1][1] > oldposB[2][1]:
-                screen.blit(bSTD,(oldposB[2][0]*30,oldposB[2][1]*30))#D
+                screen.blit(bSTD,(oldposB[2][0]*30,oldposB[2][1]*30))
             
-            pygame.draw.rect(screen, (150,50,50), rSnake) #RGB
-            pygame.draw.rect(screen, (150,70,50), pygame.Rect(oldposR[0][0]*30,oldposR[0][1]*30, 30, 30))
-            pygame.draw.rect(screen, (150,90,50), pygame.Rect(oldposR[1][0]*30,oldposR[1][1]*30, 30, 30))
-            pygame.draw.rect(screen, (150,110,50), pygame.Rect(oldposR[2][0]*30,oldposR[2][1]*30, 30, 30))
+            #R head
+            if dirR == 1:
+                screen.blit(rSHR,rSnake)
+            elif dirR == 2:
+                screen.blit(rSHD,rSnake)
+            elif dirR == 3:
+                screen.blit(rSHL,rSnake)
+            elif dirR == 4:
+                screen.blit(rSH,rSnake)
             
+            #R body 1
+            if posR[0] < oldposR[0][0] and oldposR[0][0] < oldposR[1][0]:#LR
+                screen.blit(rSSL,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[0] > oldposR[0][0] and oldposR[0][0] > oldposR[1][0]:#RL
+                screen.blit(rSSR,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[1] < oldposR[0][1] and oldposR[0][1] < oldposR[1][1]:#UD
+                screen.blit(rSSU,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[1] > oldposR[0][1] and oldposR[0][1] > oldposR[1][1]:#DU
+                screen.blit(rSSD,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[0] < oldposR[0][0] and oldposR[0][1] < oldposR[1][1]:#LD
+                screen.blit(rSsLD,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[0] < oldposR[0][0] and oldposR[0][1] > oldposR[1][1]:#LU
+                screen.blit(rSbLU,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[0] > oldposR[0][0] and oldposR[0][1] < oldposR[1][1]:#RD
+                screen.blit(rSbRD,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[0] > oldposR[0][0] and oldposR[0][1] > oldposR[1][1]:#RU
+                screen.blit(rSsRU,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[1] < oldposR[0][1] and oldposR[0][0] < oldposR[1][0]:#UR
+                screen.blit(rSbRU,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[1] < oldposR[0][1] and oldposR[0][0] > oldposR[1][0]:#UL
+                screen.blit(rSsLU,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[1] > oldposR[0][1] and oldposR[0][0] < oldposR[1][0]:#DR
+                screen.blit(rSsRD,(oldposR[0][0]*30,oldposR[0][1]*30))
+            elif posR[1] > oldposR[0][1] and oldposR[0][0] > oldposR[1][0]:#DL
+                screen.blit(rSbLD,(oldposR[0][0]*30,oldposR[0][1]*30))
+
+            #R body 2
+            if oldposR[0][0] < oldposR[1][0] and oldposR[1][0] < oldposR[2][0]:#LR
+                screen.blit(rSSL,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][0] > oldposR[1][0] and oldposR[1][0] > oldposR[2][0]:#RL
+                screen.blit(rSSR,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][1] < oldposR[1][1] and oldposR[1][1] < oldposR[2][1]:#UD
+                screen.blit(rSSU,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][1] > oldposR[1][1] and oldposR[1][1] > oldposR[2][1]:#DU
+                screen.blit(rSSD,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][0] < oldposR[1][0] and oldposR[1][1] < oldposR[2][1]:#LD
+                screen.blit(rSsLD,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][0] < oldposR[1][0] and oldposR[1][1] > oldposR[2][1]:#LU
+                screen.blit(rSbLU,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][0] > oldposR[1][0] and oldposR[1][1] < oldposR[2][1]:#RD
+                screen.blit(rSbRD,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][0] > oldposR[1][0] and oldposR[1][1] > oldposR[2][1]:#RU
+                screen.blit(rSsRU,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][1] < oldposR[1][1] and oldposR[1][0] < oldposR[2][0]:#UR
+                screen.blit(rSbRU,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][1] < oldposR[1][1] and oldposR[1][0] > oldposR[2][0]:#UL
+                screen.blit(rSsLU,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][1] > oldposR[1][1] and oldposR[1][0] < oldposR[2][0]:#DR
+                screen.blit(rSsRD,(oldposR[1][0]*30,oldposR[1][1]*30))
+            elif oldposR[0][1] > oldposR[1][1] and oldposR[1][0] > oldposR[2][0]:#DL
+                screen.blit(rSbLD,(oldposR[1][0]*30,oldposR[1][1]*30))
+
+            #R tail
+            if oldposR[1][0] < oldposR[2][0]:
+                screen.blit(rSTL,(oldposR[2][0]*30,oldposR[2][1]*30))
+            elif oldposR[1][0] > oldposR[2][0]:
+                screen.blit(rSTR,(oldposR[2][0]*30,oldposR[2][1]*30))
+            elif oldposR[1][1] < oldposR[2][1]:
+                screen.blit(rST,(oldposR[2][0]*30,oldposR[2][1]*30))
+            elif oldposR[1][1] > oldposR[2][1]:
+                screen.blit(rSTD,(oldposR[2][0]*30,oldposR[2][1]*30))
+
             #gem
             if map.M1[posB[1]][posB[0]] == 'G' or map.M1[posR[1]][posR[0]] == 'G':
                 gemMp.play()
                 level += 1;
                 run = False
+                pygame.display.update()
                 pygame.time.delay(2000)
             
             #quit
